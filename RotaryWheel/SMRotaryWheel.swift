@@ -36,7 +36,7 @@ class SMRotaryWheel: UIControl, SMRotaryProtocol {
         self.drawWheel()
         
         // 4 - Timer for rotating wheel
-        NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "rotate", userInfo: nil, repeats: true)
+       // NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "rotate", userInfo: nil, repeats: true)
         
         
         
@@ -173,10 +173,10 @@ class SMRotaryWheel: UIControl, SMRotaryProtocol {
             ilabel.tag = i
             container?.addSubview(ilabel)
             // 5- Set sector image
-            let sectorImage = UIImageView(frame: CGRectMake(12, 15, 40, 40))
+            /*let sectorImage = UIImageView(frame: CGRectMake(12, 15, 40, 40))
             sectorImage.image = UIImage(named: String(format: "icon%i.png", i))
             im.addSubview(sectorImage)
-            container?.addSubview(im)
+            container?.addSubview(im)*/
         }
     
         container?.userInteractionEnabled = false
@@ -186,9 +186,9 @@ class SMRotaryWheel: UIControl, SMRotaryProtocol {
         bg.image = UIImage(named: "bg.png")
         self.addSubview(bg)
     
-        let mask = UIImageView(frame: CGRectMake(72, 175, 58, 58))
-        mask.image = UIImage(named: "centerButton.png")
-        self.addSubview(mask)
+        //let mask = UIImageView(frame: CGRectMake(72, 175, 58, 58))
+       // mask.image = UIImage(named: "centerButton.png")
+       // self.addSubview(mask)
     
         // 8 - Initialize sectors
     
@@ -200,7 +200,7 @@ class SMRotaryWheel: UIControl, SMRotaryProtocol {
         }
     
         // 9- Call protocol method
-    self.delegate?.wheelDidChangeValue(String(format:"value is %i", self.currentSector))
+        self.delegate?.wheelDidChangeValue(String(format:"value is %i", self.currentSector))
     }
     
     private func getSectorByValue(value: Int) -> UIImageView{
@@ -287,19 +287,19 @@ class SMRotaryWheel: UIControl, SMRotaryProtocol {
     
     private func convertWeekday(number: Int) -> String{
         switch number{
-        case 1:
+        case 0:
             return "Mon"
-        case 2:
+        case 1:
             return "Tue"
-        case 3:
+        case 2:
             return "Wed"
-        case 4:
+        case 3:
             return "Thu"
-        case 5:
+        case 4:
             return "Fri"
-        case 6:
+        case 5:
             return "Sat"
-        case 7:
+        case 6:
             return "Sun"
         default:
             return "Mon"

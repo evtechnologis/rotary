@@ -15,13 +15,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // Create sector label
-        sectoLabel = UILabel(frame: CGRectMake(100, 350, 120, 30))
+        sectoLabel = UILabel(frame: CGRectMake(0, 0, 220, 50))
         sectoLabel.textAlignment = NSTextAlignment.Center
         self.view.addSubview(sectoLabel)
         
         
         
-        let wheel:SMRotaryWheel = SMRotaryWheel.init(frame: CGRectMake(0, 100, 300, 300), del: self, sectionsNum: 8)
+        let wheel:SMRotaryWheel = SMRotaryWheel.init(frame: CGRectMake(0, 100, 300, 300), del: self, sectionsNum: 7)
         
         wheel.center = CGPoint(x: 160,y: 240)
         self.view.addSubview(wheel)
@@ -36,6 +36,7 @@ class ViewController: UIViewController {
     func wheelDidChangeValue(newValue:String) ->Void
     {
         self.sectoLabel.text = newValue
+        print("label = \(self.sectoLabel.text)")
     }
 
 
