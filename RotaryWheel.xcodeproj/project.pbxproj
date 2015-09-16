@@ -7,14 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A467A82B1BA8AA9F00C892D9 /* SMSector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A467A82A1BA8AA9F00C892D9 /* SMSector.swift */; };
+		A467A83B1BA8D53100C892D9 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = A467A82D1BA8D53100C892D9 /* bg.png */; };
+		A467A83C1BA8D53100C892D9 /* centerButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A467A82E1BA8D53100C892D9 /* centerButton.png */; };
+		A467A83D1BA8D53100C892D9 /* icon0.png in Resources */ = {isa = PBXBuildFile; fileRef = A467A82F1BA8D53100C892D9 /* icon0.png */; };
+		A467A83E1BA8D53100C892D9 /* icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = A467A8301BA8D53100C892D9 /* icon1.png */; };
+		A467A83F1BA8D53100C892D9 /* icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = A467A8311BA8D53100C892D9 /* icon2.png */; };
+		A467A8401BA8D53100C892D9 /* icon3.png in Resources */ = {isa = PBXBuildFile; fileRef = A467A8321BA8D53100C892D9 /* icon3.png */; };
+		A467A8411BA8D53100C892D9 /* icon4.png in Resources */ = {isa = PBXBuildFile; fileRef = A467A8331BA8D53100C892D9 /* icon4.png */; };
+		A467A8421BA8D53100C892D9 /* icon5.png in Resources */ = {isa = PBXBuildFile; fileRef = A467A8341BA8D53100C892D9 /* icon5.png */; };
+		A467A8431BA8D53100C892D9 /* icon6.png in Resources */ = {isa = PBXBuildFile; fileRef = A467A8351BA8D53100C892D9 /* icon6.png */; };
+		A467A8441BA8D53100C892D9 /* icon7.png in Resources */ = {isa = PBXBuildFile; fileRef = A467A8361BA8D53100C892D9 /* icon7.png */; };
+		A467A8451BA8D53100C892D9 /* knob.png in Resources */ = {isa = PBXBuildFile; fileRef = A467A8371BA8D53100C892D9 /* knob.png */; };
+		A467A8461BA8D53100C892D9 /* mask copy.png in Resources */ = {isa = PBXBuildFile; fileRef = A467A8381BA8D53100C892D9 /* mask copy.png */; };
+		A467A8471BA8D53100C892D9 /* mask.png in Resources */ = {isa = PBXBuildFile; fileRef = A467A8391BA8D53100C892D9 /* mask.png */; };
+		A467A8481BA8D53100C892D9 /* segment.png in Resources */ = {isa = PBXBuildFile; fileRef = A467A83A1BA8D53100C892D9 /* segment.png */; };
 		A494387C1BA738160090B3D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494387B1BA738160090B3D3 /* AppDelegate.swift */; };
 		A494387E1BA738160090B3D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494387D1BA738160090B3D3 /* ViewController.swift */; };
 		A49438811BA738160090B3D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A494387F1BA738160090B3D3 /* Main.storyboard */; };
 		A49438831BA738160090B3D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A49438821BA738160090B3D3 /* Assets.xcassets */; };
 		A49438861BA738160090B3D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A49438841BA738160090B3D3 /* LaunchScreen.storyboard */; };
+		A494388E1BA738920090B3D3 /* SMRotaryWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494388D1BA738920090B3D3 /* SMRotaryWheel.swift */; };
+		A49438901BA7408C0090B3D3 /* SMRotaryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494388F1BA7408C0090B3D3 /* SMRotaryProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A467A82A1BA8AA9F00C892D9 /* SMSector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSector.swift; sourceTree = "<group>"; };
+		A467A82D1BA8D53100C892D9 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		A467A82E1BA8D53100C892D9 /* centerButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = centerButton.png; sourceTree = "<group>"; };
+		A467A82F1BA8D53100C892D9 /* icon0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon0.png; sourceTree = "<group>"; };
+		A467A8301BA8D53100C892D9 /* icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon1.png; sourceTree = "<group>"; };
+		A467A8311BA8D53100C892D9 /* icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon2.png; sourceTree = "<group>"; };
+		A467A8321BA8D53100C892D9 /* icon3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon3.png; sourceTree = "<group>"; };
+		A467A8331BA8D53100C892D9 /* icon4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon4.png; sourceTree = "<group>"; };
+		A467A8341BA8D53100C892D9 /* icon5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon5.png; sourceTree = "<group>"; };
+		A467A8351BA8D53100C892D9 /* icon6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon6.png; sourceTree = "<group>"; };
+		A467A8361BA8D53100C892D9 /* icon7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon7.png; sourceTree = "<group>"; };
+		A467A8371BA8D53100C892D9 /* knob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob.png; sourceTree = "<group>"; };
+		A467A8381BA8D53100C892D9 /* mask copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mask copy.png"; sourceTree = "<group>"; };
+		A467A8391BA8D53100C892D9 /* mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mask.png; sourceTree = "<group>"; };
+		A467A83A1BA8D53100C892D9 /* segment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = segment.png; sourceTree = "<group>"; };
 		A49438781BA738160090B3D3 /* RotaryWheel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RotaryWheel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A494387B1BA738160090B3D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A494387D1BA738160090B3D3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +54,8 @@
 		A49438821BA738160090B3D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A49438851BA738160090B3D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A49438871BA738160090B3D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A494388D1BA738920090B3D3 /* SMRotaryWheel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMRotaryWheel.swift; sourceTree = "<group>"; };
+		A494388F1BA7408C0090B3D3 /* SMRotaryProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMRotaryProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +69,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A467A82C1BA8D53100C892D9 /* SMRotaryWheelArt */ = {
+			isa = PBXGroup;
+			children = (
+				A467A82D1BA8D53100C892D9 /* bg.png */,
+				A467A82E1BA8D53100C892D9 /* centerButton.png */,
+				A467A82F1BA8D53100C892D9 /* icon0.png */,
+				A467A8301BA8D53100C892D9 /* icon1.png */,
+				A467A8311BA8D53100C892D9 /* icon2.png */,
+				A467A8321BA8D53100C892D9 /* icon3.png */,
+				A467A8331BA8D53100C892D9 /* icon4.png */,
+				A467A8341BA8D53100C892D9 /* icon5.png */,
+				A467A8351BA8D53100C892D9 /* icon6.png */,
+				A467A8361BA8D53100C892D9 /* icon7.png */,
+				A467A8371BA8D53100C892D9 /* knob.png */,
+				A467A8381BA8D53100C892D9 /* mask copy.png */,
+				A467A8391BA8D53100C892D9 /* mask.png */,
+				A467A83A1BA8D53100C892D9 /* segment.png */,
+			);
+			path = SMRotaryWheelArt;
+			sourceTree = "<group>";
+		};
 		A494386F1BA738160090B3D3 = {
 			isa = PBXGroup;
 			children = (
@@ -54,12 +109,16 @@
 		A494387A1BA738160090B3D3 /* RotaryWheel */ = {
 			isa = PBXGroup;
 			children = (
+				A467A82C1BA8D53100C892D9 /* SMRotaryWheelArt */,
 				A494387B1BA738160090B3D3 /* AppDelegate.swift */,
 				A494387D1BA738160090B3D3 /* ViewController.swift */,
 				A494387F1BA738160090B3D3 /* Main.storyboard */,
 				A49438821BA738160090B3D3 /* Assets.xcassets */,
 				A49438841BA738160090B3D3 /* LaunchScreen.storyboard */,
 				A49438871BA738160090B3D3 /* Info.plist */,
+				A494388D1BA738920090B3D3 /* SMRotaryWheel.swift */,
+				A494388F1BA7408C0090B3D3 /* SMRotaryProtocol.swift */,
+				A467A82A1BA8AA9F00C892D9 /* SMSector.swift */,
 			);
 			path = RotaryWheel;
 			sourceTree = "<group>";
@@ -123,8 +182,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				A49438861BA738160090B3D3 /* LaunchScreen.storyboard in Resources */,
+				A467A83E1BA8D53100C892D9 /* icon1.png in Resources */,
+				A467A83C1BA8D53100C892D9 /* centerButton.png in Resources */,
+				A467A8441BA8D53100C892D9 /* icon7.png in Resources */,
 				A49438831BA738160090B3D3 /* Assets.xcassets in Resources */,
+				A467A8421BA8D53100C892D9 /* icon5.png in Resources */,
+				A467A8461BA8D53100C892D9 /* mask copy.png in Resources */,
+				A467A8471BA8D53100C892D9 /* mask.png in Resources */,
+				A467A83B1BA8D53100C892D9 /* bg.png in Resources */,
 				A49438811BA738160090B3D3 /* Main.storyboard in Resources */,
+				A467A83D1BA8D53100C892D9 /* icon0.png in Resources */,
+				A467A8451BA8D53100C892D9 /* knob.png in Resources */,
+				A467A8411BA8D53100C892D9 /* icon4.png in Resources */,
+				A467A83F1BA8D53100C892D9 /* icon2.png in Resources */,
+				A467A8401BA8D53100C892D9 /* icon3.png in Resources */,
+				A467A8481BA8D53100C892D9 /* segment.png in Resources */,
+				A467A8431BA8D53100C892D9 /* icon6.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,8 +208,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A49438901BA7408C0090B3D3 /* SMRotaryProtocol.swift in Sources */,
+				A494388E1BA738920090B3D3 /* SMRotaryWheel.swift in Sources */,
 				A494387E1BA738160090B3D3 /* ViewController.swift in Sources */,
 				A494387C1BA738160090B3D3 /* AppDelegate.swift in Sources */,
+				A467A82B1BA8AA9F00C892D9 /* SMSector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +324,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RotaryWheel/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = EVtech.RotaryWheel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -259,6 +336,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RotaryWheel/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = EVtech.RotaryWheel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -284,6 +362,7 @@
 				A494388C1BA738160090B3D3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
