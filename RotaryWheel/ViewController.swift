@@ -25,7 +25,7 @@ class ViewController: UIViewController,SMRotaryProtocol {
         
         
         
-        let wheel:SMRotaryWheel = SMRotaryWheel.init(frame: CGRectMake(0, 100, 300, 300), del: self, sectionsNum: 7)
+        let wheel:SMRotaryWheel = SMRotaryWheel.init(frame: CGRectMake(0, 0, 300, 300), del: self, sectionsNum: 7)
         
         wheel.center = CGPoint(x: 160,y: 240)
         self.view.addSubview(wheel)

@@ -50,7 +50,7 @@ class SMRotaryWheel: UIControl {
         
         // 1.1 - Get the distance from the center
         let dist = self.calculateDistanceFromCenter(touchPoint)
-        
+        print("dist=\(dist)")
         // 1.2 - Filter out touches too close to the center
         if (dist < 40 || dist > 100)
         {
@@ -150,6 +150,7 @@ class SMRotaryWheel: UIControl {
     
     private func calculateDistanceFromCenter(point: CGPoint) -> Float{
         let center: CGPoint = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2)
+       
         let dx = point.x - center.x
         let dy = point.y - center.y
         return Float(sqrt(dx*dx + dy*dy))
@@ -192,7 +193,7 @@ class SMRotaryWheel: UIControl {
             let ilabel = UILabel(frame: CGRectMake(0, 0, 100, 40))
             ilabel.backgroundColor = UIColor.clearColor()
             ilabel.text = convertWeekday(((i + todayWeekday - 1) < 7) ? (i + todayWeekday - 1): (i + todayWeekday - 8))
-            
+            ilabel.textAlignment = .Center
              print("sector: = \(ilabel.text)")
             
             if i == 0{ // highlight today on the wheel
@@ -201,7 +202,20 @@ class SMRotaryWheel: UIControl {
             }
             
             ilabel.layer.anchorPoint = CGPointMake(1.0, 0.5)
+             ilabel.layer.position = CGPointMake((container?.bounds.size.width)!/2, (container?.bounds.size.height)!/2)
+            /*ilabel.layer.anchorPoint = CGPointMake(1/15, 1/6)
             ilabel.layer.position = CGPointMake((container?.bounds.size.width)!/2, (container?.bounds.size.height)!/2)
+            ilabel.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI/2))
+            */
+            //ilabel.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI/2))
+            //ilabel.transform = CGAffineTransformMakeTranslation(-(container?.bounds.size.width)!/2, 0)
+            
+            /*var t = CGAffineTransformIdentity
+            t = CGAffineTransformTranslate(t, CGFloat(100), CGFloat(300))
+            t = CGAffineTransformRotate(t, CGFloat(M_PI_4))
+            t = CGAffineTransformScale(t, CGFloat(-1), CGFloat(2))
+            // ... add as many as you want, then apply it to to the view
+            imageView.transform = t*/
             ilabel.transform = CGAffineTransformMakeRotation(angleSize * CGFloat(i))
             ilabel.tag = i
             container?.addSubview(ilabel)
