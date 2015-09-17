@@ -10,7 +10,7 @@ import UIKit
 import QuartzCore
 
 
-class SMRotaryWheel: UIControl, SMRotaryProtocol {
+class SMRotaryWheel: UIControl {
     
     
     var delegate: SMRotaryProtocol?
@@ -29,19 +29,15 @@ class SMRotaryWheel: UIControl, SMRotaryProtocol {
     init(frame: CGRect, del: ViewController, sectionsNum: Int) {
         
         self.numberOfSections = sectionsNum
-        self.delegate? = del as! SMRotaryProtocol
-        self.container = nil
+        delegate = del
+        self.container = del.view
         self.deltaAngle = 0
         super.init(frame: frame)
         self.drawWheel()
-        
+        print("init delegate \(delegate)")
+        print("del is \(del)")
         // 4 - Timer for rotating wheel
        // NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "rotate", userInfo: nil, repeats: true)
-        
-        
-        
-        
-        
         
     }
 
@@ -72,6 +68,7 @@ class SMRotaryWheel: UIControl, SMRotaryProtocol {
         // set current sector's alpha value to the minimum value
         let im = self.getSectorByValue(currentSector)
         im.alpha = maxAlphavalue
+        
         return true
     }
     
@@ -79,12 +76,26 @@ class SMRotaryWheel: UIControl, SMRotaryProtocol {
     
     override func continueTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
         
-        let radians: CGFloat = CGFloat(atan2f(Float((container?.transform.b)!), Float((container?.transform.a)!)))
-        print("rad is \(radians)")
+        //let radians: CGFloat = CGFloat(atan2f(Float((container?.transform.b)!), Float((container?.transform.a)!)))
+        //print("rad is \(radians)")
         
-        let pt: CGPoint = touch.locationInView(self)
-        let dx = pt.x - (container?.center.x)!
-        let dy = pt.y - (container?.center.y)!
+        let touchPoint: CGPoint = touch.locationInView(self)
+        
+        // 1.1 - Get the distance from the center
+        let dist = self.calculateDistanceFromCenter(touchPoint)
+        
+        // 1.2 - Filter out touches too close to the center
+        if (dist < 40 || dist > 100)
+        {
+            // forcing a tap to be on the ferrule
+            print("ignoring tap (%f,%f)", touchPoint.x, touchPoint.y);
+            return false
+        }
+
+        
+        
+        let dx = touchPoint.x - (container?.center.x)!
+        let dy = touchPoint.y - (container?.center.y)!
         
         let ang = atan2(dy, dx)
         let angleDifference = CGFloat(deltaAngle) - CGFloat(ang)
@@ -120,12 +131,17 @@ class SMRotaryWheel: UIControl, SMRotaryProtocol {
             }
         }
         // 7- set up animation for final rotation
-        
-        
         UIView.animateWithDuration(0.2) {
             let t: CGAffineTransform = CGAffineTransformRotate(self.container!.transform, CGFloat(-newVal))
             self.container!.transform = t;
         }
+        print("current sector is \(self.currentSector)")
+        
+       // self.delegate?.wheelDidChangeValue(String(format:"value is %i", self.currentSector))
+        self.delegate?.wheelDidChangeValue(String("\(convertWeekday(self.currentSector)) is selected"))
+        
+        let im = self.getSectorByValue(currentSector)
+        im.alpha = maxAlphavalue
         
         
         
@@ -147,9 +163,17 @@ class SMRotaryWheel: UIControl, SMRotaryProtocol {
         container = UIView(frame: self.frame)
         let angleSize:CGFloat = CGFloat(2 * M_PI) / CGFloat(numberOfSections)
     
-        // 3- Create the sectors
+        let calendar:NSCalendar = NSCalendar.currentCalendar()
+        let dateComps:NSDateComponents = calendar.components(.Weekday , fromDate: NSDate())
+        let todayWeekday:Int = dateComps.weekday
+    
+        print("today is \(todayWeekday)")
+
+    
+        // Create the sectors
         for var i = 0; i < numberOfSections; ++i {
-            // 4- Create image view
+            
+            // Create image view
             let im = UIImageView()
             im.image = UIImage(named: "segment.png")
             
@@ -159,13 +183,22 @@ class SMRotaryWheel: UIControl, SMRotaryProtocol {
             im.transform = CGAffineTransformMakeRotation(angleSize * CGFloat(i))
             im.alpha = minAlphavalue
             im.tag = i
+            
+           
             if i == 0 {
                 im.alpha = maxAlphavalue
             }
             
             let ilabel = UILabel(frame: CGRectMake(0, 0, 100, 40))
             ilabel.backgroundColor = UIColor.clearColor()
-            ilabel.text = convertWeekday(i)
+            ilabel.text = convertWeekday(((i + todayWeekday - 1) < 7) ? (i + todayWeekday - 1): (i + todayWeekday - 8))
+            
+             print("sector: = \(ilabel.text)")
+            
+            if i == 0{ // highlight today on the wheel
+                print("make today purple: \(i)")
+                ilabel.textColor = UIColor.purpleColor()
+            }
             
             ilabel.layer.anchorPoint = CGPointMake(1.0, 0.5)
             ilabel.layer.position = CGPointMake((container?.bounds.size.width)!/2, (container?.bounds.size.height)!/2)
@@ -200,7 +233,8 @@ class SMRotaryWheel: UIControl, SMRotaryProtocol {
         }
     
         // 9- Call protocol method
-        self.delegate?.wheelDidChangeValue(String(format:"value is %i", self.currentSector))
+        print("delegate is \(self.delegate)")
+        self.delegate?.wheelDidChangeValue(String("\(convertWeekday(todayWeekday - 1)) is selected"))
     }
     
     private func getSectorByValue(value: Int) -> UIImageView{
@@ -217,9 +251,9 @@ class SMRotaryWheel: UIControl, SMRotaryProtocol {
         return res
     }
 
-    func wheelDidChangeValue(newValue: String) {
-        return
-    }
+    //func wheelDidChangeValue(newValue: String) {
+       // self.sectorLabel.text = newValue
+    //}
     
     func rotate() -> Void {
         let t: CGAffineTransform = CGAffineTransformRotate(container!.transform, -0.78)
@@ -241,7 +275,9 @@ class SMRotaryWheel: UIControl, SMRotaryProtocol {
             sector.minValue = mid - (Float(fanWidth)/2)
             sector.maxValue = mid + (Float(fanWidth)/2)
             sector.sector = i
+            
             mid -= Float(fanWidth)
+            
             if sector.minValue < Float(-M_PI){
                 mid = -mid
                 mid -= Float(fanWidth)
@@ -249,7 +285,7 @@ class SMRotaryWheel: UIControl, SMRotaryProtocol {
             
             // 5 - Add sector to arry
             sectors.append(sector)
-            print("cl is \(sector)")
+            print("cl is \(sector.description)")
             
         }
     }
@@ -276,7 +312,7 @@ class SMRotaryWheel: UIControl, SMRotaryProtocol {
                 sector.minValue = fabsf(sector.maxValue)
             }
             mid -= Float(fanWidth)
-            print("cl is \(sector)")
+            print("cl is \(sector.midValue)")
             
             // 5 - Add sector to arry
             sectors.append(sector)
@@ -288,21 +324,21 @@ class SMRotaryWheel: UIControl, SMRotaryProtocol {
     private func convertWeekday(number: Int) -> String{
         switch number{
         case 0:
-            return "Mon"
-        case 1:
-            return "Tue"
-        case 2:
-            return "Wed"
-        case 3:
-            return "Thu"
-        case 4:
-            return "Fri"
-        case 5:
-            return "Sat"
-        case 6:
             return "Sun"
-        default:
+        case 1:
             return "Mon"
+        case 2:
+            return "Tue"
+        case 3:
+            return "Wed"
+        case 4:
+            return "Thu"
+        case 5:
+            return "Fri"
+        case 6:
+            return "Sat"
+        default:
+            return "Sun"
         }
     }
     

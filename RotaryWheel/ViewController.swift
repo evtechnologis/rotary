@@ -8,16 +8,20 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-    var sectoLabel = UILabel()
+class ViewController: UIViewController,SMRotaryProtocol {
+    var valueLabel = UILabel()
+    var delegate: SMRotaryProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Create sector label
-        sectoLabel = UILabel(frame: CGRectMake(0, 0, 220, 50))
-        sectoLabel.textAlignment = NSTextAlignment.Center
-        self.view.addSubview(sectoLabel)
+        valueLabel = UILabel(frame: CGRectMake((self.view.bounds.size.width / 2)-110, 50, 220, 50))
+
+        valueLabel.textAlignment = NSTextAlignment.Center
+        valueLabel.text = "Welcome to Schedule"
+        valueLabel.textColor = UIColor.redColor()
+        self.view.addSubview(valueLabel)
         
         
         
@@ -35,8 +39,9 @@ class ViewController: UIViewController {
     
     func wheelDidChangeValue(newValue:String) ->Void
     {
-        self.sectoLabel.text = newValue
-        print("label = \(self.sectoLabel.text)")
+        self.valueLabel.text = newValue
+        
+        print("(self.valueLabel.text) is Choosed.")
     }
 
 

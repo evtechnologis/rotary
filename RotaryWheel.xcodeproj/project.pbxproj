@@ -154,7 +154,7 @@
 				TargetAttributes = {
 					A49438771BA738160090B3D3 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = UR4X4CMCXP;
+						DevelopmentTeam = V39EF4QG4J;
 					};
 				};
 			};
@@ -328,7 +328,7 @@
 				INFOPLIST_FILE = RotaryWheel/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = EVtech.RotaryWheel1;
+				PRODUCT_BUNDLE_IDENTIFIER = EVtech.RotaryWheel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -343,7 +343,7 @@
 				INFOPLIST_FILE = RotaryWheel/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = EVtech.RotaryWheel1;
+				PRODUCT_BUNDLE_IDENTIFIER = EVtech.RotaryWheel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
