@@ -22,6 +22,8 @@
 		A467A8461BA8D53100C892D9 /* mask copy.png in Resources */ = {isa = PBXBuildFile; fileRef = A467A8381BA8D53100C892D9 /* mask copy.png */; };
 		A467A8471BA8D53100C892D9 /* mask.png in Resources */ = {isa = PBXBuildFile; fileRef = A467A8391BA8D53100C892D9 /* mask.png */; };
 		A467A8481BA8D53100C892D9 /* segment.png in Resources */ = {isa = PBXBuildFile; fileRef = A467A83A1BA8D53100C892D9 /* segment.png */; };
+		A48BD9A31BAB714100ACCE0F /* addButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A48BD9A21BAB714100ACCE0F /* addButton.png */; };
+		A48BD9A51BAB720D00ACCE0F /* wheel2.png in Resources */ = {isa = PBXBuildFile; fileRef = A48BD9A41BAB720D00ACCE0F /* wheel2.png */; };
 		A494387C1BA738160090B3D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494387B1BA738160090B3D3 /* AppDelegate.swift */; };
 		A494387E1BA738160090B3D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494387D1BA738160090B3D3 /* ViewController.swift */; };
 		A49438811BA738160090B3D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A494387F1BA738160090B3D3 /* Main.storyboard */; };
@@ -47,6 +49,8 @@
 		A467A8381BA8D53100C892D9 /* mask copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mask copy.png"; sourceTree = "<group>"; };
 		A467A8391BA8D53100C892D9 /* mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mask.png; sourceTree = "<group>"; };
 		A467A83A1BA8D53100C892D9 /* segment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = segment.png; sourceTree = "<group>"; };
+		A48BD9A21BAB714100ACCE0F /* addButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addButton.png; sourceTree = "<group>"; };
+		A48BD9A41BAB720D00ACCE0F /* wheel2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wheel2.png; sourceTree = "<group>"; };
 		A49438781BA738160090B3D3 /* RotaryWheel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RotaryWheel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A494387B1BA738160090B3D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A494387D1BA738160090B3D3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -78,10 +82,12 @@
 				A467A8301BA8D53100C892D9 /* icon1.png */,
 				A467A8311BA8D53100C892D9 /* icon2.png */,
 				A467A8321BA8D53100C892D9 /* icon3.png */,
+				A48BD9A21BAB714100ACCE0F /* addButton.png */,
 				A467A8331BA8D53100C892D9 /* icon4.png */,
 				A467A8341BA8D53100C892D9 /* icon5.png */,
 				A467A8351BA8D53100C892D9 /* icon6.png */,
 				A467A8361BA8D53100C892D9 /* icon7.png */,
+				A48BD9A41BAB720D00ACCE0F /* wheel2.png */,
 				A467A8371BA8D53100C892D9 /* knob.png */,
 				A467A8381BA8D53100C892D9 /* mask copy.png */,
 				A467A8391BA8D53100C892D9 /* mask.png */,
@@ -154,7 +160,7 @@
 				TargetAttributes = {
 					A49438771BA738160090B3D3 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = UR4X4CMCXP;
+						DevelopmentTeam = V39EF4QG4J;
 					};
 				};
 			};
@@ -198,6 +204,8 @@
 				A467A8401BA8D53100C892D9 /* icon3.png in Resources */,
 				A467A8481BA8D53100C892D9 /* segment.png in Resources */,
 				A467A8431BA8D53100C892D9 /* icon6.png in Resources */,
+				A48BD9A51BAB720D00ACCE0F /* wheel2.png in Resources */,
+				A48BD9A31BAB714100ACCE0F /* addButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,7 +336,7 @@
 				INFOPLIST_FILE = RotaryWheel/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = EVtech.RotaryWheel1;
+				PRODUCT_BUNDLE_IDENTIFIER = EVtech.RotaryWheel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -343,7 +351,7 @@
 				INFOPLIST_FILE = RotaryWheel/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = EVtech.RotaryWheel1;
+				PRODUCT_BUNDLE_IDENTIFIER = EVtech.RotaryWheel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

@@ -16,7 +16,7 @@ class ViewController: UIViewController,SMRotaryProtocol {
         super.viewDidLoad()
         
         // Create sector label
-        valueLabel = UILabel(frame: CGRectMake((self.view.bounds.size.width / 2)-110, 50, 220, 50))
+        valueLabel = UILabel(frame: CGRectMake((self.view.bounds.size.width / 2)-110, 10, 220, 50))
 
         valueLabel.textAlignment = NSTextAlignment.Center
         valueLabel.text = "Welcome to Schedule"
@@ -25,9 +25,9 @@ class ViewController: UIViewController,SMRotaryProtocol {
         
         
         
-        let wheel:SMRotaryWheel = SMRotaryWheel.init(frame: CGRectMake(0, 0, 300, 300), del: self, sectionsNum: 7)
+        let wheel:SMRotaryWheel = SMRotaryWheel.init(frame: CGRectMake(0, 0, 600, 600), del: self, sectionsNum: 9)
         
-        wheel.center = CGPoint(x: 160,y: 240)
+        wheel.center = CGPoint(x: 200,y: 320)
         self.view.addSubview(wheel)
         
     }

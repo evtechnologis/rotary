@@ -52,7 +52,7 @@ class SMRotaryWheel: UIControl {
         let dist = self.calculateDistanceFromCenter(touchPoint)
         print("dist=\(dist)")
         // 1.2 - Filter out touches too close to the center
-        if (dist < 40 || dist > 100)
+        if (dist < 40 || dist > 250)
         {
             // forcing a tap to be on the ferrule
             print("ignoring tap (%f,%f)", touchPoint.x, touchPoint.y);
@@ -76,16 +76,13 @@ class SMRotaryWheel: UIControl {
     
     override func continueTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
         
-        //let radians: CGFloat = CGFloat(atan2f(Float((container?.transform.b)!), Float((container?.transform.a)!)))
-        //print("rad is \(radians)")
-        
         let touchPoint: CGPoint = touch.locationInView(self)
         
         // 1.1 - Get the distance from the center
         let dist = self.calculateDistanceFromCenter(touchPoint)
         
         // 1.2 - Filter out touches too close to the center
-        if (dist < 40 || dist > 100)
+        if (dist < 40 || dist > 250)
         {
             // forcing a tap to be on the ferrule
             print("ignoring tap (%f,%f)", touchPoint.x, touchPoint.y);
@@ -109,9 +106,11 @@ class SMRotaryWheel: UIControl {
         
         // 2- Initialize new value
         var newVal = 0.0
-        
+        print("radians=\(radians)")
         // 3- Iterate through all the sectors
         for s in sectors{
+            print("sectoer: \(s.sector), mid=\(s.midValue), min=\(s.minValue), max=\(s.maxValue)")
+            
             // 4 - Check for anomaly (occurs with even number of sectors)
             if (s.minValue > 0 && s.maxValue < 0) {
                 if (s.maxValue > radians || s.minValue < radians) {
@@ -121,7 +120,7 @@ class SMRotaryWheel: UIControl {
                     } else {
                         newVal = M_PI + Double(radians)
                     }
-                    currentSector = s.sector;
+                    currentSector = s.sector
                 }
             }
                 // 6 - All non-anomalous cases
@@ -133,11 +132,10 @@ class SMRotaryWheel: UIControl {
         // 7- set up animation for final rotation
         UIView.animateWithDuration(0.2) {
             let t: CGAffineTransform = CGAffineTransformRotate(self.container!.transform, CGFloat(-newVal))
-            self.container!.transform = t;
+            self.container!.transform = t
         }
         print("current sector is \(self.currentSector)")
         
-       // self.delegate?.wheelDidChangeValue(String(format:"value is %i", self.currentSector))
         self.delegate?.wheelDidChangeValue(String("\(convertWeekday(self.currentSector)) is selected"))
         
         let im = self.getSectorByValue(currentSector)
@@ -163,12 +161,22 @@ class SMRotaryWheel: UIControl {
    private func drawWheel() -> Void {
         container = UIView(frame: self.frame)
         let angleSize:CGFloat = CGFloat(2 * M_PI) / CGFloat(numberOfSections)
-    
+        let outerRidus:CGFloat = 180.0 // outer ring for weekday
+        let innerRidus = 70.0  // inner ring for hours
+
         let calendar:NSCalendar = NSCalendar.currentCalendar()
         let dateComps:NSDateComponents = calendar.components(.Weekday , fromDate: NSDate())
         let todayWeekday:Int = dateComps.weekday
-    
+           
         print("today is \(todayWeekday)")
+    
+        let image = UIImage(named: "addButton.png") as UIImage?
+        let add_btn = UIButton(type: UIButtonType.System) as UIButton
+    
+        add_btn.frame = CGRectMake(260, 250, 100, 100)
+        add_btn.setImage(image, forState: .Normal)
+        add_btn.addTarget(self, action: "btnTouched:", forControlEvents:.TouchUpInside)
+        self.addSubview(add_btn)
 
     
         // Create the sectors
@@ -177,6 +185,7 @@ class SMRotaryWheel: UIControl {
             // Create image view
             let im = UIImageView()
             im.image = UIImage(named: "segment.png")
+            
             
             
             im.layer.anchorPoint = CGPointMake(1.0, 0.5)
@@ -190,9 +199,21 @@ class SMRotaryWheel: UIControl {
                 im.alpha = maxAlphavalue
             }
             
-            let ilabel = UILabel(frame: CGRectMake(0, 0, 100, 40))
+            self.addSubview(im)
+            
+            let ilabel = UILabel(frame: CGRectMake(0, 0, 50, 40))
             ilabel.backgroundColor = UIColor.clearColor()
-            ilabel.text = convertWeekday(((i + todayWeekday - 1) < 7) ? (i + todayWeekday - 1): (i + todayWeekday - 8))
+            
+            if i < 4 {
+                ilabel.text = convertWeekday(((i + todayWeekday - 1) < 7) ? (i + todayWeekday - 1): (i + todayWeekday - 8))
+            }else if i > 5{
+                
+                ilabel.text = convertWeekday(((todayWeekday - 1 - numberOfSections + i) > 0) ? (todayWeekday - 1 - numberOfSections + i): (todayWeekday - 1 - numberOfSections + i + 7))
+
+            }else{
+                ilabel.text = "tbd"
+            }
+            
             ilabel.textAlignment = .Center
              print("sector: = \(ilabel.text)")
             
@@ -201,22 +222,15 @@ class SMRotaryWheel: UIControl {
                 ilabel.textColor = UIColor.purpleColor()
             }
             
-            ilabel.layer.anchorPoint = CGPointMake(1.0, 0.5)
-             ilabel.layer.position = CGPointMake((container?.bounds.size.width)!/2, (container?.bounds.size.height)!/2)
-            /*ilabel.layer.anchorPoint = CGPointMake(1/15, 1/6)
+            ilabel.layer.anchorPoint = CGPointMake(0.5, 0.5)
             ilabel.layer.position = CGPointMake((container?.bounds.size.width)!/2, (container?.bounds.size.height)!/2)
-            ilabel.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI/2))
-            */
-            //ilabel.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI/2))
-            //ilabel.transform = CGAffineTransformMakeTranslation(-(container?.bounds.size.width)!/2, 0)
             
-            /*var t = CGAffineTransformIdentity
-            t = CGAffineTransformTranslate(t, CGFloat(100), CGFloat(300))
-            t = CGAffineTransformRotate(t, CGFloat(M_PI_4))
-            t = CGAffineTransformScale(t, CGFloat(-1), CGFloat(2))
-            // ... add as many as you want, then apply it to to the view
-            imageView.transform = t*/
-            ilabel.transform = CGAffineTransformMakeRotation(angleSize * CGFloat(i))
+            var t = CGAffineTransformIdentity
+            t = CGAffineTransformTranslate(t, -outerRidus * cos(CGFloat(i) * angleSize), outerRidus * sin(CGFloat(i) * angleSize))
+            t = CGAffineTransformRotate(t, CGFloat(M_PI / 2.0) - angleSize * CGFloat(i) + CGFloat(M_PI) )
+           
+            ilabel.transform = t
+            
             ilabel.tag = i
             container?.addSubview(ilabel)
             // 5- Set sector image
@@ -230,7 +244,7 @@ class SMRotaryWheel: UIControl {
         self.addSubview(container!)
     
         let bg = UIImageView(frame: self.frame)
-        bg.image = UIImage(named: "bg.png")
+        bg.image = UIImage(named: "wheel2.png")
         self.addSubview(bg)
     
         //let mask = UIImageView(frame: CGRectMake(72, 175, 58, 58))
@@ -299,7 +313,7 @@ class SMRotaryWheel: UIControl {
             
             // 5 - Add sector to arry
             sectors.append(sector)
-            print("cl is \(sector.description)")
+           print("sector: \(sector.sector), mid:\(sector.midValue),min:\(sector.minValue), max:\(sector.maxValue)")
             
         }
     }
@@ -338,21 +352,21 @@ class SMRotaryWheel: UIControl {
     private func convertWeekday(number: Int) -> String{
         switch number{
         case 0:
-            return "Sun"
+            return "SUN"
         case 1:
-            return "Mon"
+            return "MON"
         case 2:
-            return "Tue"
+            return "TUE"
         case 3:
-            return "Wed"
+            return "WED"
         case 4:
-            return "Thu"
+            return "THU"
         case 5:
-            return "Fri"
+            return "FRI"
         case 6:
-            return "Sat"
+            return "SAT"
         default:
-            return "Sun"
+            return "SUN"
         }
     }
     
