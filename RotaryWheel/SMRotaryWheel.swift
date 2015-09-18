@@ -103,7 +103,7 @@ class SMRotaryWheel: UIControl {
     override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
         // 1- Get current container rotation in radians
         let radians = atan2f(Float((container?.transform.b)!), Float((container?.transform.a)!))
-        
+        print("rotated: \(radians * 180 / Float(M_PI))")
         // 2- Initialize new value
         var newVal = 0.0
         print("radians=\(radians)")
@@ -136,6 +136,22 @@ class SMRotaryWheel: UIControl {
         }
         print("current sector is \(self.currentSector)")
         
+        // to check which label is on the current sector
+        print(self.subviews.count)
+        
+        /*for case let lableInstance as UILabel in  self.subviews{
+            
+                print(lableInstance.text)
+           
+            
+        }*/
+        
+        let labels = getLabelsInView()
+        for label in labels {
+            print(label.text)
+        }
+    
+        
         self.delegate?.wheelDidChangeValue(String("\(convertWeekday(self.currentSector)) is selected"))
         
         let im = self.getSectorByValue(currentSector)
@@ -143,6 +159,18 @@ class SMRotaryWheel: UIControl {
         
         
         
+    }
+    
+    func getLabelsInView() -> [UILabel] {
+        var results = [UILabel]()
+        for subview in self.subviews as [UIView] {
+            if let labelView = subview as? UILabel {
+                results += [labelView]
+            } else {
+                results += getLabelsInView()
+            }
+        }
+        return results
     }
     
     
@@ -155,8 +183,9 @@ class SMRotaryWheel: UIControl {
     }
     
     
-    
-    
+    func btnTouched(){
+        return
+    }
     
    private func drawWheel() -> Void {
         container = UIView(frame: self.frame)
@@ -279,14 +308,12 @@ class SMRotaryWheel: UIControl {
         return res
     }
 
-    //func wheelDidChangeValue(newValue: String) {
-       // self.sectorLabel.text = newValue
-    //}
     
-    func rotate() -> Void {
+    
+    /*func rotate() -> Void {
         let t: CGAffineTransform = CGAffineTransformRotate(container!.transform, -0.78)
         container!.transform = t
-    }
+    }*/
     
     func buildSectorsOdd() -> Void {
         // 1 - Define sector length
@@ -306,14 +333,15 @@ class SMRotaryWheel: UIControl {
             
             mid -= Float(fanWidth)
             
-            if sector.minValue < Float(-M_PI){
+            if abs(sector.minValue - Float(-M_PI)) < 0.01 {
                 mid = -mid
                 mid -= Float(fanWidth)
             }
             
             // 5 - Add sector to arry
             sectors.append(sector)
-           print("sector: \(sector.sector), mid:\(sector.midValue),min:\(sector.minValue), max:\(sector.maxValue)")
+            //print("sector minvalue=\(sector.minValue)")
+            //print("sector: \(sector.sector), mid:\(sector.midValue * 180 / Float(M_PI)))")
             
         }
     }
