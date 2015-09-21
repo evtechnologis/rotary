@@ -41,7 +41,7 @@ class ViewController: UIViewController,SMRotaryProtocol {
     {
         self.valueLabel.text = newValue
         
-        print("(self.valueLabel.text) is Choosed.")
+        //print("(self.valueLabel.text) is Choosed.")
     }
 
 

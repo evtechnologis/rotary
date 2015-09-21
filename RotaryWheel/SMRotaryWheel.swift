@@ -23,6 +23,7 @@ class SMRotaryWheel: UIControl {
     let minAlphavalue: CGFloat = 0.6
     let maxAlphavalue: CGFloat = 1.0
     var rotateDirection = 0
+    var rotateCounter = 0
     
     var currentSector = 0 // the sector that is choosed by user to show the schedule
     
@@ -51,7 +52,7 @@ class SMRotaryWheel: UIControl {
         
         // 1.1 - Get the distance from the center
         let dist = self.calculateDistanceFromCenter(touchPoint)
-        print("dist=\(dist)")
+         print("when rotate begin, currentSector = \(currentSector)")
         // 1.2 - Filter out touches too close to the center
         if (dist < 40 || dist > 250)
         {
@@ -139,63 +140,101 @@ class SMRotaryWheel: UIControl {
         
         let ang = atan2(dy, dx)
         let angleDifference = CGFloat(deltaAngle) - CGFloat(ang)
-        print("angleDifference=\(angleDifference), \(angleDifference * 9.0 / CGFloat(2 * M_PI))")
+        //print("angleDifference=\(angleDifference), \(angleDifference * 9.0 / CGFloat(2 * M_PI))")
         container?.transform = CGAffineTransformRotate(startTransform, -angleDifference)
         
         let radians = atan2f(Float((container?.transform.b)!), Float((container?.transform.a)!))
         for s in sectors{
             if (radians > s.minValue && radians < s.maxValue) {
-                print("currentSector = \(currentSector), now is \(s.sector)")
+                print("last Sector = \(currentSector), now is \(s.sector)")
                 
                 if currentSector < s.sector {
-                    if s.sector == 8 {
-                        rotateDirection = 1
+                    if s.sector == 8  && currentSector == 0{
+                        if rotateDirection > 0 {
+                            print("rotete direction change to clockwise")
+                        }
+                        rotateDirection = -1 // clockwise
+                        rotateCounter++
                     }else{
-                    rotateDirection = -1
+                        if rotateDirection < 0 {
+                            print("rotete direction change to counter-clockwise")
+                        }
+                        rotateDirection = 1 // counterclockwise
+                        rotateCounter--
                     }
                 }
                 else if currentSector > s.sector{
-                    rotateDirection = 1
+                    if currentSector == 8 && s.sector == 0{
+                        if rotateDirection < 0 {
+                            print("rotete direction change to counter-clockwise")
+                        }
+                        rotateDirection = 1
+                        rotateCounter--
+                    }else
+                    {
+                        if rotateDirection > 0 {
+                            print("rotete direction change to clockwise")
+                        }
+                        rotateDirection = -1
+                        rotateCounter++
+                    }
                 }
+                
                 currentSector = s.sector
+                print("rotate counter: \(rotateCounter), current sector: \(currentSector)")
             }
         }
         
-        
-        
-        // set the 2 invisible sector's label
-        print("when rotate, currentSector = \(currentSector)")
+        // if the rotation is less than an sector, judge the rotation direction by its angle.
         if rotateDirection == 0{
             if angleDifference < 0 {
-                rotateDirection = -1
+                print("rotate Direction is setted to clockwise")
+                rotateDirection = -1 // clockwise
             }else{
-                rotateDirection = 1
+                rotateDirection = 1 // counterclockwise
+                print("rotate Direction is setted to counter-clockwise")
             }
             
         }
+        // set the 2 invisible sector's label
         if rotateDirection < 0 {
             print("rotate clockwise.")
             
-        
             let labelTextOnCurrentSector = getWeekdayBytSector(currentSector)
+            print("current label is \(labelTextOnCurrentSector)")
+            
+            //set the lower label as it will appear clockwise
             let labelLower = ((convertWeekday(labelTextOnCurrentSector) + 4) < 7) ? convertWeekday(convertWeekday(labelTextOnCurrentSector) + 4) : convertWeekday(convertWeekday(labelTextOnCurrentSector) - 3)
-            let labelUpper = ((convertWeekday(labelTextOnCurrentSector) + 5) < 7) ? convertWeekday(convertWeekday(labelTextOnCurrentSector) + 5) : convertWeekday(convertWeekday(labelTextOnCurrentSector) - 2)
+            
+             // set the upper label as it will appear counter-clockwise
+            let labelUpper = ((convertWeekday(labelTextOnCurrentSector) - 4) > 0) ? convertWeekday(convertWeekday(labelTextOnCurrentSector) - 4) : convertWeekday(convertWeekday(labelTextOnCurrentSector) + 3)
         
             var sectorLower = 0
             var sectorUpper = 0
         
+           
             sectorUpper = ((currentSector + 4) < 9) ? (currentSector + 4) : (currentSector - 5)
             sectorLower = ((currentSector + 5) < 9) ? (currentSector + 5) : (currentSector - 4)
         
             setWeekdayBySector(sectorLower, weekday: labelLower)
             setWeekdayBySector(sectorUpper, weekday: labelUpper)
+            print(labelLower, labelUpper)
         }else if rotateDirection > 0 {
-            print("rotate count-clockwise.")
+            print("rotate counter-clockwise.")
             
             let labelTextOnCurrentSector = getWeekdayBytSector(currentSector)
-            let labelLower = ((convertWeekday(labelTextOnCurrentSector) - 5) > 0) ? convertWeekday(convertWeekday(labelTextOnCurrentSector) - 5) : convertWeekday(convertWeekday(labelTextOnCurrentSector) + 2)
+            print("current label is \(labelTextOnCurrentSector)")
+            
+            // set the lower label as it will appear as clockwise
+            let labelLower = ((convertWeekday(labelTextOnCurrentSector) + 4) < 7) ? convertWeekday(convertWeekday(labelTextOnCurrentSector) + 4) : convertWeekday(convertWeekday(labelTextOnCurrentSector) - 3)
+            
+            
+            
+            // set the upper label as it will appear counterclockwise
             let labelUpper = ((convertWeekday(labelTextOnCurrentSector) - 4) > 0) ? convertWeekday(convertWeekday(labelTextOnCurrentSector) - 4) : convertWeekday(convertWeekday(labelTextOnCurrentSector) + 3)
             
+            
+            
             var sectorLower = 0
             var sectorUpper = 0
             
@@ -204,6 +243,7 @@ class SMRotaryWheel: UIControl {
             
             setWeekdayBySector(sectorLower, weekday: labelLower)
             setWeekdayBySector(sectorUpper, weekday: labelUpper)
+             print(labelLower, labelUpper)
             
         }
         
@@ -263,7 +303,7 @@ class SMRotaryWheel: UIControl {
         }
         
         
-        print("in the end : current sector is \(self.currentSector)")
+        print("in the end : current sector is \(self.currentSector), rotate count = \(rotateCounter)")
 
         //self.delegate?.wheelDidChangeValue(String("\(convertWeekday(self.currentSector)) is selected"))
         
